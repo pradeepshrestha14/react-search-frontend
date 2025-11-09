@@ -2,6 +2,8 @@
 
 A modern React application featuring real-time product search with React Query integration and performance optimizations.
 
+Interact with this APP at Deployed URL: https://react-search-frontend.vercel.app/ 
+
 ## Features
 
 - Built with Vite and TypeScript

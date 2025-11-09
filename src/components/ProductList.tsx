@@ -37,7 +37,7 @@ export const ProductList: React.FC<ProductListProps> = ({ query }) => {
             </div>
         );
 
-    if (status === "error") return <Empty description="Error loading products." />;
+    if (status === "error") return <Empty description={<>Error loading products.<br />Backend Service(Free-Tier RENDER Cloud Nodejs APP) is being activated.Try after some time.</>} />;
 
     if (!products.length) return <Empty description="No products found." />;
 

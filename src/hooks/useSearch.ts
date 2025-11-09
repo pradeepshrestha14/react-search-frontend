@@ -28,5 +28,8 @@ export function useSearch(query: string) {
     },
     staleTime: 60_000, // 1 minute
     gcTime: 5 * 60_000, // 5 minutes
+
+    retry: 1, // retry only once (or false to disable)
+    retryDelay: 2000, // wait 2 seconds before retry
   });
 }

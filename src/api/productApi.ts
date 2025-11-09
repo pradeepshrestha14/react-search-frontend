@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "./axiosInstance";
 
 export interface Product {
   id: number;
@@ -32,15 +32,15 @@ export async function fetchProducts({
   page?: number;
   signal?: AbortSignal;
 }): Promise<ProductResponse> {
-  const url = `https://prod-node-search-backend.onrender.com/api/search?q=${encodeURIComponent(
+  const url = `/search?q=${encodeURIComponent(
     query
   )}&limit=${limit}&page=${page}`;
 
   try {
-    const response = await axios.get<ProductResponse>(url, { signal });
+    const response = await axiosInstance.get<ProductResponse>(url, { signal });
     return response.data;
   } catch (error: any) {
-    if (axios.isCancel(error)) {
+    if (error.name === "CanceledError") {
       throw new Error("Request canceled");
     }
     throw new Error(error.message || "Error fetching products");

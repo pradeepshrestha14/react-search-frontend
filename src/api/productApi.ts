@@ -14,28 +14,27 @@ export interface Product {
 export interface ProductResponse {
   products: Product[];
   total: number;
-  skip: number;
+  page: number;
   limit: number;
 }
 
 /**
- * Fetch products from dummyjson API using axios.
- * Supports skip/limit pagination and optional AbortSignal.
+ * Fetch products from backend API using page-based pagination.
  */
 export async function fetchProducts({
   query,
   limit = 12,
-  skip = 0,
+  page = 1,
   signal,
 }: {
   query: string;
   limit?: number;
-  skip?: number;
+  page?: number;
   signal?: AbortSignal;
 }): Promise<ProductResponse> {
-  const url = `https://dummyjson.com/products/search?q=${encodeURIComponent(
+  const url = `https://prod-node-search-backend.onrender.com/api/search?q=${encodeURIComponent(
     query
-  )}&limit=${limit}&skip=${skip}`;
+  )}&limit=${limit}&page=${page}`;
 
   try {
     const response = await axios.get<ProductResponse>(url, { signal });

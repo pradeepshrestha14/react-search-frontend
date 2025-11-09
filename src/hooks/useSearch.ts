@@ -3,6 +3,8 @@ import { fetchProducts } from "../api/productApi";
 import type { ProductResponse } from "../api/productApi";
 
 export function useSearch(query: string) {
+  const PAGE_SIZE = 12;
+
   return useInfiniteQuery<
     ProductResponse,
     Error,
@@ -11,14 +13,18 @@ export function useSearch(query: string) {
     number
   >({
     queryKey: ["products", query],
-    queryFn: async ({ pageParam = 0, signal }) => {
-      // fetchProducts should accept skip, limit, query, and signal
-      return fetchProducts({ query, skip: pageParam, limit: 12, signal });
+    queryFn: async ({ pageParam = 1, signal }) => {
+      return fetchProducts({
+        query,
+        page: pageParam,
+        limit: PAGE_SIZE,
+        signal,
+      });
     },
-    initialPageParam: 0,
+    initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      const nextSkip = lastPage.skip + lastPage.products.length;
-      return nextSkip < lastPage.total ? nextSkip : undefined;
+      const totalPages = Math.ceil(lastPage.total / lastPage.limit);
+      return lastPage.page < totalPages ? lastPage.page + 1 : undefined;
     },
     staleTime: 60_000, // 1 minute
     gcTime: 5 * 60_000, // 5 minutes

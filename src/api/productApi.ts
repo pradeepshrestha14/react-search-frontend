@@ -39,10 +39,13 @@ export async function fetchProducts({
   try {
     const response = await axiosInstance.get<ProductResponse>(url, { signal });
     return response.data;
-  } catch (error: any) {
-    if (error.name === "CanceledError") {
+  } catch (error: unknown) {
+    if (error instanceof Error && error.name === "CanceledError") {
       throw new Error("Request canceled");
     }
-    throw new Error(error.message || "Error fetching products");
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error("Error fetching products");
   }
 }

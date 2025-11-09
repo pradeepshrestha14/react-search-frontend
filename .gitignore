@@ -15,6 +15,10 @@ dist-ssr
 .env.local
 .env.production
 
+# Test coverage reports
+coverage/
+
+
 
 
 # Editor directories and files

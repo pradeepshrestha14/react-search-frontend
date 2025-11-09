@@ -79,7 +79,7 @@ yarn dev           # Start development server
 yarn build         # Build for production
 yarn preview       # Preview production build
 yarn test         # Run Vitest tests
-yarn coverage     # Generate test coverage
+yarn test:coverage     # Generate test coverage
 ```
 
 ## ESLint Configuration

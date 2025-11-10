@@ -7,6 +7,9 @@ Interact with this APP at Deployed URL: https://react-search-frontend.vercel.app
 Note: This app fetches data from a Node.js backend deployed on Render Cloud’s free-tier service. Since free-tier services can be suspended when inactive and only wake up upon receiving a request, the backend may take some time to start. As a result, the React app might not display actual data immediately while the backend service is waking up.
 (Backend Service deployed url: https://prod-node-search-backend.onrender.com/api/search?q=a&page=1&limit=10)
 
+UI sample:
+![alt text](image.png)
+
 ## Features
 
 - Built with Vite and TypeScript
